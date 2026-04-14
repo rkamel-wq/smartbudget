@@ -1,10 +1,21 @@
-#ifndef NETWORKSERVER_H
-#define NETWORKSERVER_H
+#pragma once
 
-class NetworkServer
-{
+#include <boost/asio.hpp>
+#include <vector>
+#include "transaction.h"
+
+class NetworkServer {
 public:
-    NetworkServer();
-};
+    NetworkServer(boost::asio::io_context& io, unsigned short port);
 
-#endif // NETWORKSERVER_H
+private:
+    void startAccept();
+    void startRead();
+    void handleMessage(const std::string& message);
+    void sendResponse(const std::string& response);
+
+    boost::asio::ip::tcp::acceptor acceptor_;
+    boost::asio::ip::tcp::socket socket_;
+    boost::asio::streambuf buffer_;
+    std::vector<Transaction> transactions_;
+};
