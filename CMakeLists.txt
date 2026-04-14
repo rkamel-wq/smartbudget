@@ -13,6 +13,8 @@ qt_add_executable(SmartBudget
     mainwindow.ui
     jsontools.h jsontools.cpp
     networkserver.h networkserver.cpp
+    server_main.cpp
+    networkclient.h networkclient.cpp
 )
 
 target_link_libraries(SmartBudget
